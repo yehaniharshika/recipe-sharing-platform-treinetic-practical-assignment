@@ -1,108 +1,113 @@
 import { Link } from "react-router-dom";
 import {
-    AppBar,
-    Toolbar,
-    Typography,
-    IconButton,
-    Button,
-    Box,
-    Drawer,
-    List,
-    ListItem,
-    ListItemText,
-    useMediaQuery,
+  AppBar,
+  Toolbar,
+  Typography,
+  IconButton,
+  Button,
+  Box,
+  Drawer,
+  List,
+  ListItem,
+  ListItemText,
+  useMediaQuery,
 } from "@mui/material";
-import {
-    Menu as MenuIcon,
-    ShoppingCart,
-    Search,
-} from "@mui/icons-material";
+import { Menu as MenuIcon, RestaurantMenu } from "@mui/icons-material";
 
-const NavigationBar = () => {
-    const isMobile = useMediaQuery("(max-width:768px)");
+interface NavigationBarProps {
+  setShowLogin?: (value: ((prevState: boolean) => boolean) | boolean) => void;
+}
 
-    const menuItems = [
-        { label: "Home", href: "/" },
-        { label: "Product", href: "#explore-products" },
-        { label: "Mobile-App", href: "#app-download" },
-        { label: "Reviews", href: "#reviews" },
-        { label: "Contact us", href: "#footer" },
-    ];
+const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
+  const isMobile = useMediaQuery("(max-width:780px)");
 
-    const drawer = (
-        <Box sx={{ width: 250 }} role="presentation">
-            <List>
-                {menuItems.map((item) => (
-                    <ListItem button key={item.label} component="a" href={item.href}>
-                        <ListItemText primary={item.label} />
-                    </ListItem>
-                ))}
-            </List>
-        </Box>
-    );
+  const menuItems = [
+    { label: "Home", href: "/" },
+    { label: "Recipes", href: "#explore-products" },
+    { label: "About", href: "#app-download" },
+    { label: "Profile", href: "#reviews" },
+    { label: "Contact us", href: "#footer" },
+  ];
 
-    return (
-        <>
-            <AppBar position="sticky" sx={{ backgroundColor: "#FF5722" }}>
-                <Toolbar sx={{ justifyContent: "space-between" }}>
-                    {/* Logo */}
-                    <Typography
-                        variant="h5"
-                        component={Link}
-                        to="/"
-                        sx={{ textDecoration: "none", color: "white", fontWeight: 600 }}
-                    >
-                        BlossomBay
-                    </Typography>
+  const drawer = (
+    <Box sx={{ width: 250 }} role="presentation">
+      <List>
+        {menuItems.map((item) => (
+          <ListItem button key={item.label} component="a" href={item.href}>
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  );
 
-                    {/* Navigation Links */}
-                    {!isMobile && (
-                        <Box sx={{ display: "flex", gap: 3 }}>
-                            {menuItems.map((item) => (
-                                <Button
-                                    key={item.label}
-                                    href={item.href}
-                                    sx={{ color: "white", textTransform: "none", fontWeight: 500 }}
-                                >
-                                    {item.label}
-                                </Button>
-                            ))}
-                        </Box>
-                    )}
+  return (
+    <>
+      <AppBar position="sticky" sx={{ backgroundColor: "#D2691E" }}>
+        <Toolbar sx={{ justifyContent: "space-between" }}>
+          <Typography
+            variant="h5"
+            component={Link}
+            to="/"
+            sx={{
+              textDecoration: "none",
+              color: "rgb(68, 7, 9)",
+              fontWeight: 600,
+              fontFamily: "'Lilita One', sans-serif",
+            }}
+          >
+            BlossomBay
+          </Typography>
 
-                    {/* Right Icons and Buttons */}
-                    <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                        <IconButton color="inherit">
-                            <Search />
-                        </IconButton>
+          {/* Navigation Links */}
+          {!isMobile && (
+            <Box sx={{ display: "flex", gap: 3 }}>
+              {menuItems.map((item) => (
+                <Button
+                  key={item.label}
+                  href={item.href}
+                  sx={{
+                    color: "white",
+                    textTransform: "none",
+                    fontWeight: 500,
+                    fontFamily: "Montserrat, sans-serif",
+                  }}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </Box>
+          )}
 
-                        <IconButton color="inherit" component={Link} to="/cart">
-                            <ShoppingCart />
-                        </IconButton>
+          {/* Right Icons and Buttons */}
+          <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <IconButton color="inherit" component={Link} to="/recipes">
+              <RestaurantMenu />
+            </IconButton>
 
-                        <Button
-                            variant="outlined"
-                            sx={{ color: "white", borderColor: "white" }}
-                        >
-                            Sign In
-                        </Button>
+            <Button
+              variant="outlined"
+              sx={{ color: "white", borderColor: "white" }}
+            >
+              Sign In
+            </Button>
 
-                        {/* Mobile Menu Icon */}
-                        {isMobile && (
-                            <IconButton color="inherit">
-                                <MenuIcon />
-                            </IconButton>
-                        )}
-                    </Box>
-                </Toolbar>
-            </AppBar>
+            {/* Mobile Menu Icon */}
+            {isMobile && (
+              <IconButton color="inherit">
+                <MenuIcon />
+              </IconButton>
+            )}
+          </Box>
+        </Toolbar>
+      </AppBar>
 
-            {/* Drawer for Mobile */}
-            <Drawer anchor="right" open={false} onClose={() => {}}>
-                {drawer}
-            </Drawer>
-        </>
-    );
+      {/* Drawer for Mobile */}
+      <Drawer anchor="right" open={false} onClose={() => {}}>
+        {drawer}
+      </Drawer>
+    </>
+  );
 };
 
 export default NavigationBar;

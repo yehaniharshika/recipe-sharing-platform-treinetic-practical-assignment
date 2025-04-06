@@ -1,15 +1,5 @@
-import React, { useContext, useState } from "react";
-import { StoreContext } from "../../context/StoreContext";
-import axios from "axios";
-import {
-    Box,
-    Button,
-    TextField,
-    Typography,
-    Checkbox,
-    FormControlLabel,
-    IconButton,
-} from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, TextField, Typography, Checkbox, FormControlLabel, IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 
 interface LoginPopupProps {
@@ -17,7 +7,6 @@ interface LoginPopupProps {
 }
 
 const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
-    const { url, setToken } = useContext(StoreContext);
     const [currState, setCurrState] = useState("Login");
     const [data, setData] = useState({
         name: "",
@@ -29,31 +18,6 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
         const name = event.target.name;
         const value = event.target.value;
         setData((prevData) => ({ ...prevData, [name]: value }));
-    };
-
-    const onLogin = async (event: React.FormEvent) => {
-        event.preventDefault();
-        let newUrl = url;
-
-        if (currState === "Login") {
-            newUrl += "/api/user/login";
-        } else {
-            newUrl += "/api/user/register";
-        }
-
-        try {
-            const response = await axios.post(newUrl, data);
-
-            if (response.data.success) {
-                setToken(response.data.token);
-                localStorage.setItem("token", response.data.token);
-                setShowLogin(false);
-            } else {
-                alert(response.data.message);
-            }
-        } catch (error) {
-            alert("Something went wrong. Please try again.");
-        }
     };
 
     return (
@@ -88,7 +52,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
                     </IconButton>
                 </Box>
 
-                <form onSubmit={onLogin} noValidate>
+                <form noValidate>
                     {currState === "Sign Up" && (
                         <TextField
                             name="name"
