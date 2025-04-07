@@ -119,7 +119,7 @@ export const recipe_list = [
   },
   {
     id: "8",
-    name: "Chocolate Cup Cake",
+    name: "Chocolate Cake",
     image: food_8,
     description:
       "Moist chocolate cupcakes topped with creamy frosting. Bake the batter in cupcake liners, then frost with chocolate icing.",

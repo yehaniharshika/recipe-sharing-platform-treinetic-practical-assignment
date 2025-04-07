@@ -83,7 +83,7 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
 
           {/* Right Icons and Buttons */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-          <IconButton color="inherit" component={Link} to="/recipes">
+            <IconButton color="inherit" component={Link} to="/recipes">
               <FavoriteIcon />
             </IconButton>
             <IconButton color="inherit" component={Link} to="/recipes">
