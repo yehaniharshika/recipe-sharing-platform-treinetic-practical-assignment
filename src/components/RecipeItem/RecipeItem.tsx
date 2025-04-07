@@ -31,7 +31,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
     <Card
       className="recipe-item"
       key={id}
-      sx={{ width: "100%", borderRadius: 2, boxShadow: 2 }}
+      sx={{ width: "100%", borderRadius: 2, boxShadow: 2 ,backgroundColor:"#f6e1d2"}}
     >
       <div className="recipe-item-img-container">
         <img src={image} alt={name} className="recipe-item-image" />

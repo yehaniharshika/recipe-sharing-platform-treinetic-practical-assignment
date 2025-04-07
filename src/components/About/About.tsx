@@ -19,7 +19,7 @@ const About = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        minHeight: "80vh",
+        minHeight: "70vh",
         padding: "20px",
       }}
     >

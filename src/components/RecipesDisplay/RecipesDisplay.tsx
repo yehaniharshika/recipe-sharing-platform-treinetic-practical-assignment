@@ -8,12 +8,11 @@ const RecipesDisplay: React.FC = () => {
   return (
     <Box className="recipes-display" id="recipes-display" sx={{ px: { xs: 2, md: 6 }, py: 4 }}>
       <Typography
-        variant="h4"
-        fontWeight={700}
+        variant="h3"
         textAlign="center"
         color="#7e3f12"
         gutterBottom
-        sx={{ fontFamily: 'Montserrat, sans-serif',marginTop:"80px"}}
+        sx={{fontFamily: "'Lilita One', sans-serif", color: "#bd5f1b" ,marginTop:"10px"}}
       >
         Top Recipes Just for You 🍽️
       </Typography>
@@ -25,6 +24,7 @@ const RecipesDisplay: React.FC = () => {
         gap={4}
         justifyContent="center"
         alignItems="stretch"
+        sx={{marginTop:"50px"}}
       >
         {recipe_list.map((item) => (
           <RecipeItem
