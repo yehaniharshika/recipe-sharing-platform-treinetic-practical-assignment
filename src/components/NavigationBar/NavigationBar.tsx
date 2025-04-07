@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import {
   AppBar,
@@ -15,6 +16,7 @@ import {
 import { Menu as MenuIcon, RestaurantMenu } from "@mui/icons-material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCardIcon from '@mui/icons-material/AddCard';
+import LoginPopup from "../LoginPopup/LoginPopup";
 
 interface NavigationBarProps {
   setShowLogin?: (value: ((prevState: boolean) => boolean) | boolean) => void;
@@ -22,6 +24,8 @@ interface NavigationBarProps {
 
 const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
   const isMobile = useMediaQuery("(max-width:780px)");
+  const [openLoginPopup, setOpenLoginPopup] = useState(false); // State to control LoginPopup visibility
+  const [openDrawer, setOpenDrawer] = useState(false); // State to control Drawer visibility
 
   const menuItems = [
     { label: "Home", href: "/" },
@@ -35,7 +39,7 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
     <Box sx={{ width: 250 }} role="presentation">
       <List>
         {menuItems.map((item) => (
-          <ListItem  key={item.label} component="a" href={item.href}>
+          <ListItem key={item.label} component={Link} to={item.href}>
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
@@ -67,7 +71,8 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
               {menuItems.map((item) => (
                 <Button
                   key={item.label}
-                  href={item.href}
+                  component={Link}
+                  to={item.href}
                   sx={{
                     color: "white",
                     textTransform: "none",
@@ -93,13 +98,14 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
             <Button
               variant="outlined"
               sx={{ color: "white", borderColor: "white" }}
+              onClick={() => setOpenLoginPopup(true)} // Show LoginPopup when button clicked
             >
               Sign In
             </Button>
 
             {/* Mobile Menu Icon */}
             {isMobile && (
-              <IconButton color="inherit">
+              <IconButton color="inherit" onClick={() => setOpenDrawer(!openDrawer)}>
                 <MenuIcon />
               </IconButton>
             )}
@@ -108,9 +114,12 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
       </AppBar>
 
       {/* Drawer for Mobile */}
-      <Drawer anchor="right" open={false} onClose={() => {}}>
+      <Drawer anchor="right" open={openDrawer} onClose={() => setOpenDrawer(false)}>
         {drawer}
       </Drawer>
+
+      {/* Login Popup */}
+      {openLoginPopup && <LoginPopup setShowLogin={setOpenLoginPopup} />}
     </>
   );
 };
