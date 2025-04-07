@@ -4,6 +4,7 @@ import {useState} from "react";
 import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import {Route, Routes} from "react-router-dom";
 import Home from './pages/Home/Home.tsx';
+import Footer from './components/Footer/Footer.tsx';
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
                     <Route path="/myOrders" element={<MyOrders />} /> */}
                 </Routes>
             </div>
+            <Footer/>
         </>
     );
 }
