@@ -35,7 +35,7 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
     <Box sx={{ width: 250 }} role="presentation">
       <List>
         {menuItems.map((item) => (
-          <ListItem button key={item.label} component="a" href={item.href}>
+          <ListItem  key={item.label} component="a" href={item.href}>
             <ListItemText primary={item.label} />
           </ListItem>
         ))}

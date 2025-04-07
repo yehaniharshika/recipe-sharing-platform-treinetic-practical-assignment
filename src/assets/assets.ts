@@ -12,6 +12,7 @@ import rating_starts from "./rating_starts.png";
 
 export const assets = {
   rating_starts,
+  
 };
 
 export const recipe_list = [

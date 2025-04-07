@@ -1,6 +1,6 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { recipe_list } from '../../assets/assets_demo';
+import { recipe_list } from '../../assets/assets';
 import RecipeItem from '../RecipeItem/RecipeItem';
 
 
