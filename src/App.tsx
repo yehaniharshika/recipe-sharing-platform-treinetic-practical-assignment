@@ -1,5 +1,5 @@
 import './App.css'
-import NavigationBar from "./components/NavigationBar.tsx";
+import NavigationBar from "./components/NavigationBar/NavigationBar.tsx";
 import {useState} from "react";
 import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import {Route, Routes} from "react-router-dom";

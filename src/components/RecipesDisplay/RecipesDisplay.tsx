@@ -11,9 +11,9 @@ const RecipesDisplay: React.FC = () => {
         variant="h4"
         fontWeight={700}
         textAlign="center"
-        color="primary"
+        color="#7e3f12"
         gutterBottom
-        sx={{ fontFamily: 'Montserrat, sans-serif' }}
+        sx={{ fontFamily: 'Montserrat, sans-serif',marginTop:"80px"}}
       >
         Top Recipes Just for You 🍽️
       </Typography>

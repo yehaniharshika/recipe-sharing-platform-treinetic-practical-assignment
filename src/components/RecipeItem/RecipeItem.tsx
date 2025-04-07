@@ -27,6 +27,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
   };
 
   return (
+    
     <Card
       className="recipe-item"
       key={id}
