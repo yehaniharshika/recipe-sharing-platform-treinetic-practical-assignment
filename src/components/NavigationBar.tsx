@@ -61,7 +61,7 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
 
           {/* Navigation Links */}
           {!isMobile && (
-            <Box sx={{ display: "flex", gap: 3 }}>
+            <Box sx={{ display: "flex", gap: 2 }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.label}

@@ -1,20 +1,20 @@
 import { Box, Button, Typography } from "@mui/material";
 import React from "react";
+import backgroundImage from '../../assets/f.jpg';
 
 const Header = () => {
   return (
     <Box
       sx={{
-        backgroundImage:
-          "./f.jpg",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        height: "60vh",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        color: "white",
-        textAlign: "center",
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        height: '80vh',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: 'white',
+        textAlign: 'center',
         padding: 3,
       }}
     >
