@@ -13,6 +13,8 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { Menu as MenuIcon, RestaurantMenu } from "@mui/icons-material";
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import AddCardIcon from '@mui/icons-material/AddCard';
 
 interface NavigationBarProps {
   setShowLogin?: (value: ((prevState: boolean) => boolean) | boolean) => void;
@@ -81,8 +83,11 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
 
           {/* Right Icons and Buttons */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+          <IconButton color="inherit" component={Link} to="/recipes">
+              <FavoriteIcon />
+            </IconButton>
             <IconButton color="inherit" component={Link} to="/recipes">
-              <RestaurantMenu />
+              <AddCardIcon />
             </IconButton>
 
             <Button
