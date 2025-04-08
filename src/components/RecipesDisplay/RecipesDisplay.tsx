@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { recipe_list } from '../../assets/assets';
 import RecipeItem from '../RecipeItem/RecipeItem';
+import SearchBar from '../SearchBar/SearchBar';
 
 
 const RecipesDisplay: React.FC = () => {
+  const [query, setQuery] = useState('');
+  
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log('Searching for:', query);
+    // You can add real filter logic here
+  };
+
   return (
     <Box className="recipes-display" id="recipes-display" sx={{ px: { xs: 2, md: 6 }, py: 4 }}>
       <Typography
@@ -16,6 +25,10 @@ const RecipesDisplay: React.FC = () => {
       >
         Top Recipes Just for You 🍽️
       </Typography>
+
+      {/* Search */}
+       {/* SearchBar Component */}
+      <SearchBar query={query} setQuery={setQuery} handleSubmit={handleSubmit} />
 
       <Box
         className="recipes-display-list"

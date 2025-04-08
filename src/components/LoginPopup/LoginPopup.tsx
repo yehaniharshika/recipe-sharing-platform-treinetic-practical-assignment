@@ -74,22 +74,38 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
           {currState === "Sign Up" && (
             <TextField
               name="name"
-              placeholder="Your name"
+              placeholder="Your Name"
               className="field"
               onChange={onChangeHandler}
               value={data.name}
               fullWidth
               sx={{
                 marginBottom: 2,
+                fontSize:"13px",
                 fontFamily: "Montserrat, sans-serif",
-                fontWeight: "bold",
+                "& .MuiOutlinedInput-root": {
+                  fontFamily: "Montserrat, sans-serif",
+                  "& fieldset": {
+                    borderColor: "#ccc", // default
+                  },
+                  "&:hover fieldset": {
+                    borderColor: "#FF5722",
+                  },
+                  "&.Mui-focused fieldset": {
+                    borderColor: "#FF5722",
+                    borderWidth: "3px",
+                  },
+                },
+                "& .MuiInputBase-input::placeholder": {
+                  fontFamily: "Montserrat, sans-serif",
+                },
               }}
             />
           )}
 
           <TextField
             name="email"
-            placeholder="Your email"
+            placeholder="Your Email"
             className="field"
             onChange={onChangeHandler}
             value={data.email}
@@ -97,7 +113,24 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
             fullWidth
             sx={{
               marginBottom: 2,
+              fontSize:"13px",
               fontFamily: "Montserrat, sans-serif",
+              "& .MuiOutlinedInput-root": {
+                fontFamily: "Montserrat, sans-serif",
+                "& fieldset": {
+                  borderColor: "#ccc", // default
+                },
+                "&:hover fieldset": {
+                  borderColor: "#FF5722",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#FF5722",
+                  borderWidth: "3px",
+                },
+              },
+              "& .MuiInputBase-input::placeholder": {
+                fontFamily: "Montserrat, sans-serif",
+              },
             }}
           />
 
@@ -110,8 +143,25 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
             type="password"
             fullWidth
             sx={{
+              fontSize:"13px",
               marginBottom: 2,
               fontFamily: "Montserrat, sans-serif",
+              "& .MuiOutlinedInput-root": {
+                fontFamily: "Montserrat, sans-serif",
+                "& fieldset": {
+                  borderColor: "#ccc", // default
+                },
+                "&:hover fieldset": {
+                  borderColor: "#FF5722",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#FF5722",
+                  borderWidth: "3px",
+                },
+              },
+              "& .MuiInputBase-input::placeholder": {
+                fontFamily: "Montserrat, sans-serif",
+              },
             }}
           />
 
