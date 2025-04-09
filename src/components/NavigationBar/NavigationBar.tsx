@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
@@ -17,19 +17,30 @@ import { AccountCircle, Menu as MenuIcon } from "@mui/icons-material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddCardIcon from "@mui/icons-material/AddCard";
 import LoginPopup from "../LoginPopup/LoginPopup";
+import BedtimeIcon from "@mui/icons-material/Bedtime";
 
 const NavigationBar = () => {
   const isMobile = useMediaQuery("(max-width:780px)");
   const [openLoginPopup, setOpenLoginPopup] = useState(false);
   const [openDrawer, setOpenDrawer] = useState(false);
   const [isLoggedIn] = useState(false);
+  const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Apply background color to body directly
+    document.body.style.backgroundColor = darkMode ? "#000" : "#fff";
+    document.body.style.color = darkMode ? "#fff" : "#000";
+  }, [darkMode]);
+
+  const toggleDarkMode = () => {
+    setDarkMode((prev) => !prev);
+  };
 
   const menuItems = [
     { label: "Home", href: "/" },
     { label: "Recipes", href: "recipes-display" },
     { label: "About", href: "about" },
-    { label: "Profile", href: "reviews" },
     { label: "Contact us", href: "contact" },
   ];
 
@@ -84,7 +95,7 @@ const NavigationBar = () => {
           </Typography>
 
           {!isMobile && (
-            <Box sx={{ display: "flex", gap: 2 }}>
+            <Box sx={{ display: "flex", gap: 1 }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.label}
@@ -103,6 +114,12 @@ const NavigationBar = () => {
           )}
 
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <IconButton
+              onClick={toggleDarkMode}
+              sx={{ color: darkMode ? "#000" : "#fff" }}
+            >
+              <BedtimeIcon />
+            </IconButton>
             <IconButton color="inherit" component={Link} to="/favorite-recipes">
               <FavoriteIcon />
             </IconButton>
