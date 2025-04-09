@@ -9,11 +9,16 @@ const FavoriteRecipe = () => {
     const storedFavorites = Object.keys(localStorage).map((key) => {
       try {
         const recipe = JSON.parse(localStorage.getItem(key) || "{}");
-        return recipe;
+        // Ensure it has an id and recipeTitle to prevent duplicate/undefined keys
+        if (recipe?.id && recipe?.recipeTitle) {
+          return recipe;
+        }
+        return null;
       } catch (e) {
         return null;
       }
-    }).filter(Boolean); // Remove nulls
+    }).filter(Boolean); // Remove null or invalid entries
+
     setFavorites(storedFavorites);
   }, []);
 
@@ -37,7 +42,11 @@ const FavoriteRecipe = () => {
       </Typography>
 
       {favorites.length === 0 ? (
-        <Typography variant="body1" align="center" sx={{fontFamily: "Montserrat, sans-serif",}}>
+        <Typography
+          variant="body1"
+          align="center"
+          sx={{ fontFamily: "Montserrat, sans-serif" }}
+        >
           No favorite recipes yet!
         </Typography>
       ) : (

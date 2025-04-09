@@ -64,7 +64,10 @@ const NavigationBar = () => {
   };
 
   const drawer = (
-    <Box sx={{ width: 250 }} role="presentation">
+    <Box
+      sx={{ width: 250, backgroundColor: "#d18f5f", height: "100%" }}
+      role="presentation"
+    >
       <List>
         {menuItems.map((item) => (
           <ListItem
@@ -72,8 +75,22 @@ const NavigationBar = () => {
             to={item.href}
             key={item.label}
             onClick={() => handleNavClick(item.href)}
+            sx={{
+              "&:hover .MuiListItemText-primary": {
+                color: "#974c16",
+              },
+            }}
           >
-            <ListItemText primary={item.label} />
+            <ListItemText
+              primary={item.label}
+              primaryTypographyProps={{
+                sx: {
+                  fontFamily: "Montserrat, sans-serif",
+                  fontWeight: 500,
+                  color: "white",
+                },
+              }}
+            />
           </ListItem>
         ))}
       </List>
@@ -217,6 +234,7 @@ const NavigationBar = () => {
               <IconButton
                 color="inherit"
                 onClick={() => setOpenDrawer(!openDrawer)}
+                sx={{fontWeight: 500,fontFamily: "Montserrat, sans-serif",}}
               >
                 <MenuIcon />
               </IconButton>

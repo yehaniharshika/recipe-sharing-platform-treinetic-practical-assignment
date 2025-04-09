@@ -4,6 +4,7 @@ import About from "../../components/About/About";
 import AppDownload from "../../components/AppDownload/AppDownload";
 import { useEffect, useState } from "react";
 
+
 const Home = () => {
   const [recipes, setRecipes] = useState<any[]>([]);
 
@@ -16,7 +17,7 @@ const Home = () => {
     <div>
       <Header />
       <About />
-      <RecipesDisplay recipes={recipes} />
+      <RecipesDisplay />
       <AppDownload />
     </div>
   );

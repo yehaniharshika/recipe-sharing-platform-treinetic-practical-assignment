@@ -1,6 +1,8 @@
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { useRef, useState } from "react";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { addRecipe } from "../../reducers/RecipeSlice";
 
 // Define the type for the AddRecipes props
 interface AddRecipesProps {
@@ -11,6 +13,7 @@ const AddRecipes: React.FC<AddRecipesProps> = () => {
   const [image, setImage] = useState<File | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -42,21 +45,35 @@ const AddRecipes: React.FC<AddRecipesProps> = () => {
   const handleAddRecipe = (e: React.FormEvent) => {
     e.preventDefault(); // prevent refresh
 
-    const newRecipe = {
-      id: Math.random().toString(36).substr(2, 9), // or use crypto.randomUUID()
+    const newRecipe = dispatch(addRecipe({
+      id: Math.random().toString(36).substr(2, 9), 
       image: preview || "",
       recipeTitle: formData.recipeTitle,
       cookingTime: formData.cookingTime,
-      ingredients: formData.ingredients
-        .split(",")
-        .map((item) => item.trim())
-        .filter(Boolean),
+      ingredients: formData.ingredients.split(',').map((ingredient) => ingredient.trim()),
       instructions: formData.instructions,
-    };
+    }));
+    // const newRecipe = {
+    //   id: Math.random().toString(36).substr(2, 9), 
+    //   image: preview || "",
+    //   recipeTitle: formData.recipeTitle,
+    //   cookingTime: formData.cookingTime,
+    //   ingredients: formData.ingredients
+    //     .split(",")
+    //     .map((item) => item.trim())
+    //     .filter(Boolean),
+    //   instructions: formData.instructions,
+    // };
 
-    const existing = JSON.parse(localStorage.getItem("recipes") || "[]");
-    existing.push(newRecipe);
-    localStorage.setItem("recipes", JSON.stringify(existing));
+    setFormData({
+      image: "",
+      recipeTitle: "",
+      cookingTime: "",
+      ingredients: "",
+      instructions: "",
+    });
+    setImage(null);
+    setPreview(null);
 
     console.log("Recipe saved successfully:", newRecipe);
     navigate("/");
