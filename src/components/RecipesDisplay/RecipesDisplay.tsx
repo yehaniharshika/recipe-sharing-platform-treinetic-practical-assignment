@@ -1,35 +1,41 @@
-import React, { useState } from 'react';
-import { Box, Typography } from '@mui/material';
-import RecipeItem from '../RecipeItem/RecipeItem';
-import SearchBar from '../SearchBar/SearchBar';
+import React, { useState } from "react";
+import { Box, Typography } from "@mui/material";
+import RecipeItem from "../RecipeItem/RecipeItem";
+import SearchBar from "../SearchBar/SearchBar";
 
 interface RecipesDisplayProps {
   recipes: any[];
 }
 
 const RecipesDisplay: React.FC<RecipesDisplayProps> = ({ recipes }) => {
-  const [query, setQuery] = useState('');
-  
+  const [query, setQuery] = useState("");
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('Searching for:', query);
-    // You can add real filter logic here
+    console.log("Searching for:", query);
+    // Add filter logic if needed
   };
 
   return (
-    <Box className="recipes-display" id="recipes-display" sx={{ px: { xs: 2, md: 6 }, py: 4 }}>
+    <Box
+      className="recipes-display"
+      id="recipes-display"
+      sx={{ px: { xs: 2, md: 6 }, py: 4 }}
+    >
       <Typography
         variant="h3"
         textAlign="center"
         color="#7e3f12"
         gutterBottom
-        sx={{fontFamily: "'Lilita One', sans-serif", color: "#bd5f1b" ,marginTop:"10px"}}
+        sx={{
+          fontFamily: "'Lilita One', sans-serif",
+          color: "#bd5f1b",
+          marginTop: "10px",
+        }}
       >
         Top Recipes Just for You 🍽️
       </Typography>
 
-      {/* Search */}
-       {/* SearchBar Component */}
       <SearchBar query={query} setQuery={setQuery} handleSubmit={handleSubmit} />
 
       <Box
@@ -39,7 +45,7 @@ const RecipesDisplay: React.FC<RecipesDisplayProps> = ({ recipes }) => {
         gap={4}
         justifyContent="center"
         alignItems="stretch"
-        sx={{marginTop:"50px"}}
+        sx={{ marginTop: "50px" }}
       >
         {recipes.map((recipe) => (
           <RecipeItem
@@ -57,6 +63,3 @@ const RecipesDisplay: React.FC<RecipesDisplayProps> = ({ recipes }) => {
 };
 
 export default RecipesDisplay;
-
-
-

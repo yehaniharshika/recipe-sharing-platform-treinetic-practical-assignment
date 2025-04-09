@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, Typography, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { assets } from "../../assets/assets";
@@ -10,6 +10,8 @@ interface RecipeItemProps {
   image: string;
   ingredients: string[];
   instructions: string;
+  isFavoritePage?: boolean;
+  onRemoveFavorite?: () => void;
 }
 
 const RecipeItem: React.FC<RecipeItemProps> = ({
@@ -18,12 +20,35 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
   image,
   ingredients,
   instructions,
+  isFavoritePage = false,
+  onRemoveFavorite,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
+  useEffect(() => {
+    const existing = localStorage.getItem(id);
+    if (existing) setIsFavorite(true);
+  }, [id]);
+
   const handleFavoriteClick = () => {
-    setIsFavorite(!isFavorite);
-    console.log("click");
+    const newFavoriteStatus = !isFavorite;
+    setIsFavorite(newFavoriteStatus);
+    if (newFavoriteStatus) {
+      localStorage.setItem(
+        id,
+        JSON.stringify({ id, recipeTitle, image, ingredients, instructions })
+      );
+    } else {
+      localStorage.removeItem(id);
+    }
+  };
+
+  const handleIconClick = () => {
+    if (isFavoritePage && onRemoveFavorite) {
+      onRemoveFavorite();
+    } else {
+      handleFavoriteClick();
+    }
   };
 
   return (
@@ -51,12 +76,14 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
           </Typography>
           <img src={assets.rating_starts} alt="rating" />
         </div>
+
         <Typography
           className="product-item-desc"
           sx={{ fontFamily: "Montserrat, sans-serif" }}
         >
           {instructions}
         </Typography>
+
         <Typography
           className="recipe-item-ingredient"
           sx={{ fontFamily: "Montserrat, sans-serif", fontWeight: "bold" }}
@@ -66,15 +93,17 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
         <ul className="ingredient-list">
           {Array.isArray(ingredients) ? (
             ingredients.map((ingredient, index) => (
-              <li key={index}>{ingredient}</li>
+              <li key={ingredient + index}>{ingredient}</li>
             ))
           ) : (
             <li>No ingredients available</li>
           )}
         </ul>
 
-        <IconButton className="favorite-icon" onClick={handleFavoriteClick}>
-          <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
+        <IconButton className="favorite-icon" onClick={handleIconClick}>
+          <FavoriteIcon
+            sx={{ color: isFavorite || isFavoritePage ? "red" : "gray" }}
+          />
         </IconButton>
       </CardContent>
     </Card>

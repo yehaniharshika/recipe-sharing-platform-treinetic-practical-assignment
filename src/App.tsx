@@ -5,6 +5,7 @@ import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home.tsx";
 import Footer from "./components/Footer/Footer.tsx";
 import AddRecipes from "./pages/AddRecipes/AddRecipes.tsx";
+import FavoriteRecipe from "./pages/FavoriteRecipe/FavoriteRecipe.tsx";
 
 function App() {
   const [showLogin, setShowLogin] = useState(false);
@@ -20,6 +21,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/recipes" element={<AddRecipes onAddRecipe={handleAddRecipe} />} />
+          <Route path="/favorite-recipes" element={<FavoriteRecipe />} />
         </Routes>
       </div>
       <Footer/>
