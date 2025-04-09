@@ -13,20 +13,20 @@ import {
   ListItemText,
   useMediaQuery,
 } from "@mui/material";
-import { AccountCircle, Menu as MenuIcon, RestaurantMenu } from "@mui/icons-material";
+import { AccountCircle, Menu as MenuIcon } from "@mui/icons-material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import LoginPopup from "../LoginPopup/LoginPopup";
 
-interface NavigationBarProps {
-  setShowLogin?: (value: ((prevState: boolean) => boolean) | boolean) => void;
-}
+// interface NavigationBarProps {
+//   setShowLogin?: (value: ((prevState: boolean) => boolean) | boolean) => void;
+// }
 
 const NavigationBar = () => {
   const isMobile = useMediaQuery("(max-width:780px)");
   const [openLoginPopup, setOpenLoginPopup] = useState(false); // State to control LoginPopup visibility
   const [openDrawer, setOpenDrawer] = useState(false); // State to control Drawer visibility
-  const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [isLoggedIn] = useState(false); 
 
   const menuItems = [
     { label: "Home", href: "/" },
