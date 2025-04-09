@@ -21,7 +21,7 @@ const AppDownload = () => {
       >
          For Better Experience Download<br />
         <Box component="span" sx={{ fontFamily: 'Lilita One, sans-serif', color: 'rgb(68, 7, 9)' }}>
-        YumVerse
+        FlavorNest
         </Box>{' '}
         App
       </Typography>

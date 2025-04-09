@@ -1,5 +1,6 @@
 import { Box, Button, Typography } from "@mui/material";
 import backgroundImage from "../../assets/f.jpg";
+import '../../index.css';
 
 const Header = () => {
   return (
@@ -28,15 +29,16 @@ const Header = () => {
         }}
       >
         <Typography
-          variant="h1"
+          variant="h2"
           fontWeight="bold"
           gutterBottom
           sx={{
             fontWeight: 700,
             fontFamily: "'Lilita One', sans-serif",
             color: "#542a0c",
-            position: "relative", // Allows positioning of the pseudo-element
-            display: "inline-block", // Ensures the border is around the text
+            position: "relative", 
+            display: "inline-block", 
+             
           }}
         >
           Welcome to FlavorNest Recipes
@@ -47,17 +49,29 @@ const Header = () => {
               left: 0,
               right: 0,
               bottom: 0,
-              border: "2px solid white", // Adds a white border around the text
-              zIndex: -1, // Places the border behind the text
+              border: "2px solid white", 
+              zIndex: -1, 
+              width: "100%",
+              height: "100%", 
+              padding: "2px", 
             }}
           />
         </Typography>
 
-        <Typography variant="h6" mb={3}>
+        <Typography
+          variant="h6"
+          mb={3}
+          sx={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800 ,animation: "fadeIn 3s",}}
+        >
           Share your love for cooking and discover mouthwatering recipes from
           chefs and foodies around the world.
         </Typography>
-        <Button variant="contained" color="warning" size="large">
+        <Button
+          variant="contained"
+          color="warning"
+          size="large"
+          sx={{ fontFamily: "Montserrat, sans-serif" }}
+        >
           Explore Recipes
         </Button>
       </Box>
