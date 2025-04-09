@@ -1,5 +1,4 @@
 import { Box, Button, Typography } from "@mui/material";
-import React from "react";
 import backgroundImage from "../../assets/f.jpg";
 
 const Header = () => {

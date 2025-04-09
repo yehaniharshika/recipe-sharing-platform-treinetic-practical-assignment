@@ -13,7 +13,7 @@ import {
   ListItemText,
   useMediaQuery,
 } from "@mui/material";
-import { Menu as MenuIcon, RestaurantMenu } from "@mui/icons-material";
+import { AccountCircle, Menu as MenuIcon, RestaurantMenu } from "@mui/icons-material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import AddCardIcon from '@mui/icons-material/AddCard';
 import LoginPopup from "../LoginPopup/LoginPopup";
@@ -22,10 +22,11 @@ interface NavigationBarProps {
   setShowLogin?: (value: ((prevState: boolean) => boolean) | boolean) => void;
 }
 
-const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
+const NavigationBar = () => {
   const isMobile = useMediaQuery("(max-width:780px)");
   const [openLoginPopup, setOpenLoginPopup] = useState(false); // State to control LoginPopup visibility
   const [openDrawer, setOpenDrawer] = useState(false); // State to control Drawer visibility
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
   const menuItems = [
     { label: "Home", href: "/" },
@@ -57,12 +58,12 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
             to="/"
             sx={{
               textDecoration: "none",
-              color: "rgb(68, 7, 9)",
+              color: "rgb(248, 244, 244)",
               fontWeight: 600,
               fontFamily: "'Lilita One', sans-serif",
             }}
           >
-            BlossomBay
+            FlavorNest
           </Typography>
 
           {/* Navigation Links */}
@@ -95,13 +96,19 @@ const NavigationBar = ({ setShowLogin }: NavigationBarProps) => {
               <AddCardIcon />
             </IconButton>
 
-            <Button
-              variant="outlined"
-              sx={{ color: "white", borderColor: "white" }}
-              onClick={() => setOpenLoginPopup(true)} // Show LoginPopup when button clicked
-            >
-              Sign In
-            </Button>
+            {isLoggedIn ? (
+              <IconButton color="inherit">
+                <AccountCircle />
+              </IconButton>
+            ) : (
+              <Button
+                variant="outlined"
+                sx={{ color: "white", borderColor: "white" }}
+                onClick={() => setOpenLoginPopup(true)}
+              >
+                Sign In
+              </Button>
+            )}
 
             {/* Mobile Menu Icon */}
             {isMobile && (

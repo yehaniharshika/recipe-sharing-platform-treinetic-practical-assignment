@@ -1,11 +1,5 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Button,
-  TextField,
-  Typography,
-  IconButton,
-} from "@mui/material";
+import { Box, Button, TextField, Typography, IconButton, Alert } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import "./LoginPopup.css";
 
@@ -20,11 +14,36 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
     email: "",
     password: "",
   });
+  const [message, setMessage] = useState("");
 
   const onChangeHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
     const name = event.target.name;
     const value = event.target.value;
     setData((prevData) => ({ ...prevData, [name]: value }));
+  };
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    // Basic Validation
+    if (currState === "Sign Up" && !data.name.trim()) {
+      setMessage("Please enter your name.");
+      return;
+    }
+    if (!data.email.trim() || !data.password.trim()) {
+      setMessage("Email and password are required.");
+      return;
+    }
+
+    // Simulated Success Message
+    setMessage(
+      currState === "Login"
+        ? "Login successful!"
+        : "Account created successfully!"
+    );
+
+    // Clear fields (optional)
+    setData({ name: "", email: "", password: "" });
   };
 
   return (
@@ -52,10 +71,9 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
           display: "flex",
           flexDirection: "column",
           gap: 2,
-          border:3,
+          border: 3,
           borderColor: "gray",
-          fontFamily: "Montserrat, sans-serif" 
-    
+          fontFamily: "Montserrat, sans-serif",
         }}
       >
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
@@ -70,7 +88,13 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
           </IconButton>
         </Box>
 
-        <form noValidate>
+        {message && (
+          <Alert severity="success" sx={{ fontFamily: "Montserrat" }}>
+            {message}
+          </Alert>
+        )}
+
+        <form onSubmit={handleSubmit} noValidate>
           {currState === "Sign Up" && (
             <TextField
               name="name"
@@ -79,27 +103,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
               onChange={onChangeHandler}
               value={data.name}
               fullWidth
-              sx={{
-                marginBottom: 2,
-                fontSize:"13px",
-                fontFamily: "Montserrat, sans-serif",
-                "& .MuiOutlinedInput-root": {
-                  fontFamily: "Montserrat, sans-serif",
-                  "& fieldset": {
-                    borderColor: "#ccc", // default
-                  },
-                  "&:hover fieldset": {
-                    borderColor: "#FF5722",
-                  },
-                  "&.Mui-focused fieldset": {
-                    borderColor: "#FF5722",
-                    borderWidth: "3px",
-                  },
-                },
-                "& .MuiInputBase-input::placeholder": {
-                  fontFamily: "Montserrat, sans-serif",
-                },
-              }}
+              sx={textFieldStyles}
             />
           )}
 
@@ -111,27 +115,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
             value={data.email}
             type="email"
             fullWidth
-            sx={{
-              marginBottom: 2,
-              fontSize:"13px",
-              fontFamily: "Montserrat, sans-serif",
-              "& .MuiOutlinedInput-root": {
-                fontFamily: "Montserrat, sans-serif",
-                "& fieldset": {
-                  borderColor: "#ccc", // default
-                },
-                "&:hover fieldset": {
-                  borderColor: "#FF5722",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#FF5722",
-                  borderWidth: "3px",
-                },
-              },
-              "& .MuiInputBase-input::placeholder": {
-                fontFamily: "Montserrat, sans-serif",
-              },
-            }}
+            sx={textFieldStyles}
           />
 
           <TextField
@@ -142,27 +126,7 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
             className="field"
             type="password"
             fullWidth
-            sx={{
-              fontSize:"13px",
-              marginBottom: 2,
-              fontFamily: "Montserrat, sans-serif",
-              "& .MuiOutlinedInput-root": {
-                fontFamily: "Montserrat, sans-serif",
-                "& fieldset": {
-                  borderColor: "#ccc", // default
-                },
-                "&:hover fieldset": {
-                  borderColor: "#FF5722",
-                },
-                "&.Mui-focused fieldset": {
-                  borderColor: "#FF5722",
-                  borderWidth: "3px",
-                },
-              },
-              "& .MuiInputBase-input::placeholder": {
-                fontFamily: "Montserrat, sans-serif",
-              },
-            }}
+            sx={textFieldStyles}
           />
 
           <Button
@@ -172,27 +136,47 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
             sx={{
               fontFamily: "Montserrat, sans-serif",
               backgroundColor: "#7e3f12",
+              marginTop: 1,
+              "&:hover": { backgroundColor: "#5d2d0a" },
             }}
           >
             {currState === "Sign Up" ? "Create account" : "Login"}
           </Button>
 
           {currState === "Login" ? (
-            <Typography sx={{ fontFamily: "Montserrat, sans-serif" ,marginTop:"10px"}}>
+            <Typography
+              sx={{ fontFamily: "Montserrat, sans-serif", marginTop: "10px" }}
+            >
               Create a new account?{" "}
               <span
-                onClick={() => setCurrState("Sign Up")}
-                style={{ color: "#FF5722", fontWeight: "800",cursor: "pointer" }}
+                onClick={() => {
+                  setCurrState("Sign Up");
+                  setMessage("");
+                }}
+                style={{
+                  color: "#FF5722",
+                  fontWeight: "800",
+                  cursor: "pointer",
+                }}
               >
                 Click here
               </span>
             </Typography>
           ) : (
-            <Typography sx={{ fontFamily: "Montserrat, sans-serif" ,marginTop:"10px"}}>
+            <Typography
+              sx={{ fontFamily: "Montserrat, sans-serif", marginTop: "10px" }}
+            >
               Already have an account?{" "}
               <span
-                onClick={() => setCurrState("Login")}
-                style={{ color: "#FF5722", cursor: "pointer",fontWeight: "800" }}
+                onClick={() => {
+                  setCurrState("Login");
+                  setMessage("");
+                }}
+                style={{
+                  color: "#FF5722",
+                  cursor: "pointer",
+                  fontWeight: "800",
+                }}
               >
                 Login here
               </span>
@@ -202,6 +186,28 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
       </Box>
     </Box>
   );
+};
+
+const textFieldStyles = {
+  marginBottom: 2,
+  fontSize: "13px",
+  fontFamily: "Montserrat, sans-serif",
+  "& .MuiOutlinedInput-root": {
+    fontFamily: "Montserrat, sans-serif",
+    "& fieldset": {
+      borderColor: "#ccc",
+    },
+    "&:hover fieldset": {
+      borderColor: "#FF5722",
+    },
+    "&.Mui-focused fieldset": {
+      borderColor: "#FF5722",
+      borderWidth: "3px",
+    },
+  },
+  "& .MuiInputBase-input::placeholder": {
+    fontFamily: "Montserrat, sans-serif",
+  },
 };
 
 export default LoginPopup;
