@@ -43,14 +43,14 @@ const AddRecipes: React.FC<AddRecipesProps> = () => {
     e.preventDefault(); // prevent refresh
 
     const newRecipe = {
-      id: Date.now().toString(),
+      id: Math.random().toString(36).substr(2, 9), // or use crypto.randomUUID()
       image: preview || "",
       recipeTitle: formData.recipeTitle,
       cookingTime: formData.cookingTime,
       ingredients: formData.ingredients
         .split(",")
         .map((item) => item.trim())
-        .filter(Boolean), // Removes empty items
+        .filter(Boolean),
       instructions: formData.instructions,
     };
 

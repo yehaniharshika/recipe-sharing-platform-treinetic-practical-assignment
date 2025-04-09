@@ -12,6 +12,7 @@ interface RecipeItemProps {
   instructions: string;
   isFavoritePage?: boolean;
   onRemoveFavorite?: () => void;
+  onClick?: () => void; // Add this line to accept onClick
 }
 
 const RecipeItem: React.FC<RecipeItemProps> = ({
@@ -22,6 +23,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
   instructions,
   isFavoritePage = false,
   onRemoveFavorite,
+  onClick,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -61,6 +63,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
         boxShadow: 2,
         backgroundColor: "#f6e1d2",
       }}
+      onClick={onClick}
     >
       <div className="recipe-item-img-container">
         <img src={image} alt={recipeTitle} className="recipe-item-image" />
@@ -93,7 +96,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
         <ul className="ingredient-list">
           {Array.isArray(ingredients) ? (
             ingredients.map((ingredient, index) => (
-              <li key={ingredient + index}>{ingredient}</li>
+              <li key={index}>{ingredient}</li>
             ))
           ) : (
             <li>No ingredients available</li>

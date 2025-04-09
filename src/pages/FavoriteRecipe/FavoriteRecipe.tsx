@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Grid, Typography, Box, Card } from "@mui/material";
 import RecipeItem from "../../components/RecipeItem/RecipeItem";
 
