@@ -1,11 +1,4 @@
-import React from "react";
-import {
-  Card,
-  CardContent,
-  Typography,
-  Box,
-  Grid,
-} from "@mui/material";
+import { Card, CardContent, Typography, Box, Grid } from "@mui/material";
 
 import findIcon from "../../assets/icons/find.png";
 import recipeIcon from "../../assets/icons/recipe.png";
@@ -13,7 +6,7 @@ import rateIcon from "../../assets/icons/rate.png";
 
 const About = () => {
   return (
-    <Box id="about"
+    <Box
       sx={{
         display: "flex",
         flexDirection: "column",
@@ -85,17 +78,12 @@ const About = () => {
               boxShadow: 3,
               border: 3,
               borderColor: "#bd5f1b",
-              backgroundColor:"#f6e1d2",
-              cursor:"pointer"
+              backgroundColor: "#f6e1d2",
+              cursor: "pointer",
             }}
           >
             <CardContent>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mb={2}
-              >
+              <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
                 <img
                   src={recipeIcon}
                   alt="Find Recipes"
@@ -133,17 +121,12 @@ const About = () => {
               maxWidth: "275px",
               border: 3,
               borderColor: "#bd5f1b",
-              backgroundColor:"#f6e1d2",
-              cursor:"pointer"
+              backgroundColor: "#f6e1d2",
+              cursor: "pointer",
             }}
           >
             <CardContent>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mb={2}
-              >
+              <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
                 <img
                   src={rateIcon}
                   alt="Find Recipes"
@@ -158,9 +141,13 @@ const About = () => {
               >
                 Rate Recipes
               </Typography>
-              <Typography variant="body2" align="center" sx={{ fontFamily: "Montserrat, sans-serif", fontWeight: "400" }}>
+              <Typography
+                variant="body2"
+                align="center"
+                sx={{ fontFamily: "Montserrat, sans-serif", fontWeight: "400" }}
+              >
                 Help others discover great meals by rating and reviewing the
-                recipes you've tried.Your feedback guides our community toward
+                recipes you've tried. Your feedback guides our community toward
                 the most delicious dishes!
               </Typography>
             </CardContent>
@@ -177,17 +164,12 @@ const About = () => {
               boxShadow: 3,
               border: 3,
               borderColor: "#bd5f1b",
-              backgroundColor:"#f6e1d2",
-              cursor:"pointer"
+              backgroundColor: "#f6e1d2",
+              cursor: "pointer",
             }}
           >
             <CardContent>
-              <Box
-                display="flex"
-                justifyContent="center"
-                alignItems="center"
-                mb={2}
-              >
+              <Box display="flex" justifyContent="center" alignItems="center" mb={2}>
                 <img
                   src={findIcon}
                   alt="Find Recipes"
