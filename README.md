@@ -6,6 +6,7 @@ FlavorNest is a recipe-sharing platform frontend that allows users to discover, 
 
 - **React.js**
 - **Redux**
+- **TypeScript**
 - **MaterialUI**
 
 ## Setup & Installation⚙️ 
