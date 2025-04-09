@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -14,34 +14,50 @@ import {
   useMediaQuery,
 } from "@mui/material";
 import { AccountCircle, Menu as MenuIcon } from "@mui/icons-material";
-import FavoriteIcon from '@mui/icons-material/Favorite';
-import AddCardIcon from '@mui/icons-material/AddCard';
+import FavoriteIcon from "@mui/icons-material/Favorite";
+import AddCardIcon from "@mui/icons-material/AddCard";
 import LoginPopup from "../LoginPopup/LoginPopup";
-
-// interface NavigationBarProps {
-//   setShowLogin?: (value: ((prevState: boolean) => boolean) | boolean) => void;
-// }
 
 const NavigationBar = () => {
   const isMobile = useMediaQuery("(max-width:780px)");
-  const [openLoginPopup, setOpenLoginPopup] = useState(false); // State to control LoginPopup visibility
-  const [openDrawer, setOpenDrawer] = useState(false); // State to control Drawer visibility
-  const [isLoggedIn] = useState(false); 
-  // const [isLoggedIn, setIsLoggedIn] = useState(false); 
+  const [openLoginPopup, setOpenLoginPopup] = useState(false);
+  const [openDrawer, setOpenDrawer] = useState(false);
+  const [isLoggedIn] = useState(false);
+  const navigate = useNavigate();
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "Recipes", href: "#recipes-display" },
-    { label: "About", href: "#about" },
-    { label: "Profile", href: "#reviews" },
-    { label: "Contact us", href: "#contact" },
+    { label: "Recipes", href: "recipes-display" },
+    { label: "About", href: "about" },
+    { label: "Profile", href: "reviews" },
+    { label: "Contact us", href: "contact" },
   ];
+
+  const handleNavClick = (href: string) => {
+    if (href === "/") {
+      navigate("/");
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } else {
+      const element = document.getElementById(href);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      } else {
+        navigate(`/#${href}`);
+      }
+    }
+    setOpenDrawer(false);
+  };
 
   const drawer = (
     <Box sx={{ width: 250 }} role="presentation">
       <List>
         {menuItems.map((item) => (
-          <ListItem key={item.label} component={Link} to={item.href}>
+          <ListItem
+            component={Link}
+            to={item.href}
+            key={item.label}
+            onClick={() => handleNavClick(item.href)}
+          >
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
@@ -67,14 +83,12 @@ const NavigationBar = () => {
             FlavorNest
           </Typography>
 
-          {/* Navigation Links */}
           {!isMobile && (
             <Box sx={{ display: "flex", gap: 2 }}>
               {menuItems.map((item) => (
                 <Button
                   key={item.label}
-                  component={Link}
-                  to={item.href}
+                  onClick={() => handleNavClick(item.href)}
                   sx={{
                     color: "white",
                     textTransform: "none",
@@ -88,7 +102,6 @@ const NavigationBar = () => {
             </Box>
           )}
 
-          {/* Right Icons and Buttons */}
           <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
             <IconButton color="inherit" component={Link} to="/recipes">
               <FavoriteIcon />
@@ -111,9 +124,11 @@ const NavigationBar = () => {
               </Button>
             )}
 
-            {/* Mobile Menu Icon */}
             {isMobile && (
-              <IconButton color="inherit" onClick={() => setOpenDrawer(!openDrawer)}>
+              <IconButton
+                color="inherit"
+                onClick={() => setOpenDrawer(!openDrawer)}
+              >
                 <MenuIcon />
               </IconButton>
             )}
@@ -121,12 +136,14 @@ const NavigationBar = () => {
         </Toolbar>
       </AppBar>
 
-      {/* Drawer for Mobile */}
-      <Drawer anchor="right" open={openDrawer} onClose={() => setOpenDrawer(false)}>
+      <Drawer
+        anchor="right"
+        open={openDrawer}
+        onClose={() => setOpenDrawer(false)}
+      >
         {drawer}
       </Drawer>
 
-      {/* Login Popup */}
       {openLoginPopup && <LoginPopup setShowLogin={setOpenLoginPopup} />}
     </>
   );

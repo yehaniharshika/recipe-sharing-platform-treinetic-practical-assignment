@@ -1,7 +1,6 @@
 import "./App.css";
 import NavigationBar from "./components/NavigationBar/NavigationBar.tsx";
 import { useState } from "react";
-import LoginPopup from "./components/LoginPopup/LoginPopup.tsx";
 import { Route, Routes } from "react-router-dom";
 import Home from "./pages/Home/Home.tsx";
 import Footer from "./components/Footer/Footer.tsx";
@@ -23,6 +22,7 @@ function App() {
           <Route path="/recipes" element={<AddRecipes onAddRecipe={handleAddRecipe} />} />
         </Routes>
       </div>
+      <Footer/>
     </>
   );
 }

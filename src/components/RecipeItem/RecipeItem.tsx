@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Card, CardContent, Typography, IconButton, Box } from "@mui/material";
+import { Card, CardContent, Typography, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import { assets } from "../../assets/assets";
 import "./RecipeItem.css";

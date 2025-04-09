@@ -19,7 +19,6 @@ const Home = () => {
       <About />
       <RecipesDisplay recipes={recipes} />
       <AppDownload />
-      <Footer />
     </div>
   );
 };
