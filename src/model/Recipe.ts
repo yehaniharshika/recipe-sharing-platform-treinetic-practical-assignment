@@ -3,9 +3,9 @@ export class Recipe {
     recipeTitle: string;
     cookingTime: string;
     ingredients: string;
-    instruction: string;
+    instruction: [];
 
-    constructor(image:string,recipeTitle: string, cookingTime: string, ingredients: string, instruction: string) {
+    constructor(image:string,recipeTitle: string, cookingTime: string, ingredients: string, instruction: []) {
         this.image = image
         this.recipeTitle = recipeTitle
         this.cookingTime = cookingTime

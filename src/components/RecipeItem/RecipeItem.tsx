@@ -6,18 +6,18 @@ import "./RecipeItem.css";
 
 interface RecipeItemProps {
   id: string;
-  name: string;
+  recipeTitle: string;
   image: string;
-  description: string;
   ingredients: string[];
+  instructions: string;
 }
 
 const RecipeItem: React.FC<RecipeItemProps> = ({
   id,
-  name,
+  recipeTitle,
   image,
-  description,
   ingredients,
+  instructions,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
 
@@ -27,14 +27,18 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
   };
 
   return (
-    
     <Card
       className="recipe-item"
       key={id}
-      sx={{ width: "100%", borderRadius: 2, boxShadow: 2 ,backgroundColor:"#f6e1d2"}}
+      sx={{
+        width: "100%",
+        borderRadius: 2,
+        boxShadow: 2,
+        backgroundColor: "#f6e1d2",
+      }}
     >
       <div className="recipe-item-img-container">
-        <img src={image} alt={name} className="recipe-item-image" />
+        <img src={image} alt={recipeTitle} className="recipe-item-image" />
       </div>
 
       <CardContent className="product-item-info">
@@ -43,7 +47,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
             variant="h6"
             sx={{ fontFamily: "Montserrat, sans-serif", fontWeight: "bold" }}
           >
-            {name}
+            {recipeTitle}
           </Typography>
           <img src={assets.rating_starts} alt="rating" />
         </div>
@@ -51,7 +55,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
           className="product-item-desc"
           sx={{ fontFamily: "Montserrat, sans-serif" }}
         >
-          {description}
+          {instructions}
         </Typography>
         <Typography
           className="recipe-item-ingredient"
@@ -60,10 +64,15 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
           Ingredients:
         </Typography>
         <ul className="ingredient-list">
-          {ingredients.map((item, index) => (
-            <li key={index}>{item}</li>
-          ))}
+          {Array.isArray(ingredients) ? (
+            ingredients.map((ingredient, index) => (
+              <li key={index}>{ingredient}</li>
+            ))
+          ) : (
+            <li>No ingredients available</li>
+          )}
         </ul>
+
         <IconButton className="favorite-icon" onClick={handleFavoriteClick}>
           <FavoriteIcon sx={{ color: isFavorite ? "red" : "gray" }} />
         </IconButton>

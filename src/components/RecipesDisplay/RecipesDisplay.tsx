@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Box, Typography } from '@mui/material';
-import { recipe_list } from '../../assets/assets';
 import RecipeItem from '../RecipeItem/RecipeItem';
 import SearchBar from '../SearchBar/SearchBar';
 
+interface RecipesDisplayProps {
+  recipes: any[];
+}
 
-const RecipesDisplay: React.FC = () => {
+const RecipesDisplay: React.FC<RecipesDisplayProps> = ({ recipes }) => {
   const [query, setQuery] = useState('');
   
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -39,14 +41,14 @@ const RecipesDisplay: React.FC = () => {
         alignItems="stretch"
         sx={{marginTop:"50px"}}
       >
-        {recipe_list.map((item) => (
+        {recipes.map((recipe) => (
           <RecipeItem
-            key={item.id}
-            id={item.id}
-            name={item.name}
-            description={item.description}
-            image={item.image}
-            ingredients={item.ingredients}
+            key={recipe.id}
+            id={recipe.id}
+            recipeTitle={recipe.recipeTitle}
+            image={recipe.image}
+            ingredients={recipe.ingredients}
+            instructions={recipe.instructions}
           />
         ))}
       </Box>
