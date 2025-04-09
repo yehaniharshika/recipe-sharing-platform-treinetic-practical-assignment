@@ -1,13 +1,25 @@
 import React, { useState } from "react";
-import { Box, Button, TextField, Typography, IconButton, Alert } from "@mui/material";
+import {
+  Box,
+  Button,
+  TextField,
+  Typography,
+  IconButton,
+  Alert,
+} from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import "./LoginPopup.css";
+import Swal from "sweetalert2";
 
 interface LoginPopupProps {
   setShowLogin: (show: boolean) => void;
+  setIsLoggedIn: (loggedIn: boolean) => void;
 }
 
-const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
+const LoginPopup: React.FC<LoginPopupProps> = ({
+  setShowLogin,
+  setIsLoggedIn,
+}) => {
   const [currState, setCurrState] = useState("Login");
   const [data, setData] = useState({
     name: "",
@@ -25,25 +37,57 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Basic Validation
     if (currState === "Sign Up" && !data.name.trim()) {
       setMessage("Please enter your name.");
       return;
     }
+
     if (!data.email.trim() || !data.password.trim()) {
       setMessage("Email and password are required.");
       return;
     }
 
-    // Simulated Success Message
-    setMessage(
-      currState === "Login"
-        ? "Login successful!"
-        : "Account created successfully!"
-    );
+    if (currState === "Sign Up") {
+      // Save to localStorage
+      localStorage.setItem("user", JSON.stringify(data));
+      setMessage("Account created successfully!");
+      setTimeout(() => {
+        setCurrState("Login");
+        setMessage("");
+        setData({ name: "", email: "", password: "" });
+      }, 1000);
+    } else {
+      // Login check
+      const savedUser = JSON.parse(localStorage.getItem("user") || "{}");
+      if (
+        data.email === savedUser.email &&
+        data.password === savedUser.password
+      ) {
+        setMessage("Login successful!");
+        setIsLoggedIn(true);
 
-    // Clear fields (optional)
-    setData({ name: "", email: "", password: "" });
+        // SweetAlert after login
+        setTimeout(() => {
+          setShowLogin(false);
+          Swal.fire({
+            title: "✅ Login Successful!",
+            icon: "success",
+            confirmButtonText: "OK",
+            background: "white",
+            color: "black",
+            confirmButtonColor: "#D2691E",
+            width: "450px",
+            customClass: {
+              title: "swal-title",
+              popup: "swal-popup",
+              confirmButton: "swal-button",
+            },
+          });
+        }, 1000);
+      } else {
+        setMessage("Invalid email or password!");
+      }
+    }
   };
 
   return (
@@ -89,7 +133,15 @@ const LoginPopup: React.FC<LoginPopupProps> = ({ setShowLogin }) => {
         </Box>
 
         {message && (
-          <Alert severity="success" sx={{ fontFamily: "Montserrat" }}>
+          <Alert
+            severity={
+              message === "Login successful!" ||
+              message === "Account created successfully!"
+                ? "success"
+                : "error"
+            }
+            sx={{ fontFamily: "Montserrat" }}
+          >
             {message}
           </Alert>
         )}

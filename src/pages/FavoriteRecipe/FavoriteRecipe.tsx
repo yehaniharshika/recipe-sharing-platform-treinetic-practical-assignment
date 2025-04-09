@@ -37,7 +37,7 @@ const FavoriteRecipe = () => {
       </Typography>
 
       {favorites.length === 0 ? (
-        <Typography variant="body1" align="center">
+        <Typography variant="body1" align="center" sx={{fontFamily: "Montserrat, sans-serif",}}>
           No favorite recipes yet!
         </Typography>
       ) : (
