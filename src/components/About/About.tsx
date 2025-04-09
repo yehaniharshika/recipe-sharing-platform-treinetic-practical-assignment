@@ -13,7 +13,7 @@ import rateIcon from "../../assets/icons/rate.png";
 
 const About = () => {
   return (
-    <Box
+    <Box id="about"
       sx={{
         display: "flex",
         flexDirection: "column",

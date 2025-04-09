@@ -6,6 +6,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 const Footer = () => {
   return (
     <Box
+      id="contact"
       sx={{
         backgroundColor: "#323232",
         color: "#d9d9d9",

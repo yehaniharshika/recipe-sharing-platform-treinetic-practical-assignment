@@ -27,13 +27,14 @@ const NavigationBar = () => {
   const [openLoginPopup, setOpenLoginPopup] = useState(false); // State to control LoginPopup visibility
   const [openDrawer, setOpenDrawer] = useState(false); // State to control Drawer visibility
   const [isLoggedIn] = useState(false); 
+  // const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "Recipes", href: "#explore-products" },
-    { label: "About", href: "#app-download" },
+    { label: "Recipes", href: "#recipes-display" },
+    { label: "About", href: "#about" },
     { label: "Profile", href: "#reviews" },
-    { label: "Contact us", href: "#footer" },
+    { label: "Contact us", href: "#contact" },
   ];
 
   const drawer = (
