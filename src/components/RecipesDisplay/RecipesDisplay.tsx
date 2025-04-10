@@ -124,9 +124,15 @@ const RecipesDisplay: React.FC = () => {
   };
 
   // Filter the recipes based on the query
-  const filteredRecipes = recipes.filter((recipe) =>
-    recipe.recipeTitle.toLowerCase().includes(query.toLowerCase())
-  );
+  const filteredRecipes = recipes.filter((recipe) => {
+    const lowerQuery = query.toLowerCase();
+    const titleMatch = recipe.recipeTitle.toLowerCase().includes(lowerQuery);
+    const ingredientsMatch = recipe.ingredients.some((ingredient) =>
+      ingredient.toLowerCase().includes(lowerQuery)
+    );
+    return titleMatch || ingredientsMatch;
+  });
+  
 
   return (
     <Box
@@ -163,7 +169,7 @@ const RecipesDisplay: React.FC = () => {
         alignItems="stretch"
         sx={{ marginTop: "50px", cursor: "pointer" }}
       >
-        {recipes.map((recipe) => (
+         {filteredRecipes.map((recipe) => (
           <RecipeItem
             key={recipe.id}
             id={recipe.id}
