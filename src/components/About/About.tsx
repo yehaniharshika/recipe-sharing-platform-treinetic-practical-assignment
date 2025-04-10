@@ -15,6 +15,7 @@ const About = () => {
         minHeight: "70vh",
         padding: "20px",
       }}
+       id="about"
     >
       <Typography
         variant="h3"
@@ -69,7 +70,7 @@ const About = () => {
         }}
       >
         {/* Card 1: Upload Recipes */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
           <Card
             sx={{
               minWidth: 275,
@@ -112,7 +113,7 @@ const About = () => {
         </Grid>
 
         {/* Card 2: Create Recipes */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
           <Card
             sx={{
               minWidth: 275,
@@ -155,7 +156,7 @@ const About = () => {
         </Grid>
 
         {/* Card 3: Find Recipes */}
-        <Grid item xs={12} sm={6} md={4}>
+        <Grid sx={{ xs: 12, sm: 6, md: 4 }}>
           <Card
             sx={{
               minWidth: 275,

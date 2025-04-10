@@ -1,11 +1,12 @@
 import { Box, Button, Typography } from "@mui/material";
 import backgroundImage from "../../assets/f.jpg";
-import '../../index.css';
+import "../../index.css";
 
 const Header = () => {
   return (
     <Box
       sx={{
+        position: "relative",
         backgroundImage: `url(${backgroundImage})`,
         backgroundSize: "cover",
         backgroundPosition: "center",
@@ -18,27 +19,47 @@ const Header = () => {
         padding: 3,
         marginTop: "30px",
         borderRadius: "30px",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.4)", // Dark overlay with 40% opacity
+          borderRadius: "30px",
+        },
       }}
     >
       <Box
         sx={{
-          backgroundColor: "",
+          position: "relative", // This ensures the text and background behind it is on top of the overlay
+          backgroundColor: "", // Light background behind text for better contrast
           borderRadius: 2,
           padding: 4,
           maxWidth: 800,
+          zIndex: 2, // Ensures text is above the dark overlay
         }}
       >
         <Typography
-          variant="h2"
+          variant="h1"
           fontWeight="bold"
           gutterBottom
           sx={{
             fontWeight: 700,
             fontFamily: "'Lilita One', sans-serif",
             color: "#542a0c",
-            position: "relative", 
-            display: "inline-block", 
-             
+            position: "relative",
+            display: "inline-block",
+            fontSize: {
+              xs: "3rem", 
+              sm: "3rem", 
+              md: "4rem", 
+              lg: "5rem", 
+              xl: "6rem", 
+            },
+            textShadow: "2px 2px 3px white",
+            
           }}
         >
           Welcome to FlavorNest Recipes
@@ -49,11 +70,11 @@ const Header = () => {
               left: 0,
               right: 0,
               bottom: 0,
-              border: "2px solid white", 
-              zIndex: -1, 
+              border: "",
+              zIndex: 1,
               width: "100%",
-              height: "100%", 
-              padding: "2px", 
+              height: "100%",
+              padding: "2px",
             }}
           />
         </Typography>
@@ -61,7 +82,12 @@ const Header = () => {
         <Typography
           variant="h6"
           mb={3}
-          sx={{ fontFamily: "Montserrat, sans-serif", fontWeight: 800 ,animation: "fadeIn 3s",}}
+          sx={{
+            fontFamily: "Montserrat, sans-serif",
+            fontWeight: 700,
+            animation: "fadeIn 3s",
+            color: "white", // Ensuring the text is visible on a lighter background
+          }}
         >
           Share your love for cooking and discover mouthwatering recipes from
           chefs and foodies around the world.

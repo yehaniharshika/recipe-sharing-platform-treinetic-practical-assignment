@@ -43,8 +43,8 @@ const NavigationBar = () => {
 
   const menuItems = [
     { label: "Home", href: "/" },
-    { label: "Recipes", href: "recipes-display" },
     { label: "About", href: "about" },
+    { label: "Recipes", href: "recipes-display" },
     { label: "Contact us", href: "contact" },
   ];
 
@@ -65,10 +65,29 @@ const NavigationBar = () => {
 
   const drawer = (
     <Box
-      sx={{ width: 250, backgroundColor: "#d18f5f", height: "100%" }}
+      sx={{
+        width: 250,
+        backgroundColor: "#d18f5f",
+        height: "100%",
+        border: 3,
+        borderColor: "#D2691E",
+      }}
       role="presentation"
     >
-      <List>
+      <Typography
+        sx={{
+          textDecoration: "none",
+          color: "rgb(248, 244, 244)",
+          fontWeight: 600,
+          fontFamily: "'Lilita One', sans-serif",
+          fontSize: "24px",
+          marginLeft: "20px",
+          marginTop:"30px"
+        }}
+      >
+        🍝FlavorNest
+      </Typography>
+      <List sx={{ marginTop: "50px" }}>
         {menuItems.map((item) => (
           <ListItem
             component={Link}
@@ -78,6 +97,7 @@ const NavigationBar = () => {
             sx={{
               "&:hover .MuiListItemText-primary": {
                 color: "#974c16",
+                fontWeight:800
               },
             }}
           >
@@ -146,7 +166,10 @@ const NavigationBar = () => {
 
   return (
     <>
-      <AppBar position="sticky" sx={{ backgroundColor: "#D2691E" }}>
+      <AppBar
+        position="sticky"
+        sx={{ backgroundColor: "#D2691E", borderRadius: "25px" }}
+      >
         <Toolbar sx={{ justifyContent: "space-between" }}>
           <Typography
             variant="h5"
@@ -159,7 +182,7 @@ const NavigationBar = () => {
               fontFamily: "'Lilita One', sans-serif",
             }}
           >
-            FlavorNest
+            🍝FlavorNest
           </Typography>
 
           {!isMobile && (
@@ -213,17 +236,34 @@ const NavigationBar = () => {
                       navigate("/my-recipes");
                       setAnchorEl(null);
                     }}
-                    sx={{fontWeight: 500,fontFamily: "Montserrat, sans-serif",}}
+                    sx={{
+                      fontWeight: 500,
+                      fontFamily: "Montserrat, sans-serif",
+                    }}
                   >
                     My Recipes
                   </MenuItem>
-                  <MenuItem sx={{fontWeight: 500,fontFamily: "Montserrat, sans-serif",}} onClick={handleLogout}>Logout</MenuItem>
+                  <MenuItem
+                    sx={{
+                      fontWeight: 500,
+                      fontFamily: "Montserrat, sans-serif",
+                    }}
+                    onClick={handleLogout}
+                  >
+                    Logout
+                  </MenuItem>
                 </Menu>
               </>
             ) : (
               <Button
                 variant="outlined"
-                sx={{ color: "white", borderColor: "white" }}
+                sx={{
+                  color: "white",
+                  borderColor: "white",
+                  fontSize: "12px",
+                  fontWeight: 500,
+                  fontFamily: "Montserrat, sans-serif",
+                }}
                 onClick={() => setOpenLoginPopup(true)}
               >
                 Sign In
@@ -234,7 +274,7 @@ const NavigationBar = () => {
               <IconButton
                 color="inherit"
                 onClick={() => setOpenDrawer(!openDrawer)}
-                sx={{fontWeight: 500,fontFamily: "Montserrat, sans-serif",}}
+                sx={{ fontWeight: 500, fontFamily: "Montserrat, sans-serif" }}
               >
                 <MenuIcon />
               </IconButton>
