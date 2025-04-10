@@ -35,7 +35,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
   onClick,
 }) => {
   const [isFavorite, setIsFavorite] = useState(false);
-  const [recipeDetails, setRecipeDetails] = useState<any>(null);
+ 
 
   useEffect(() => {
     const existing = localStorage.getItem(id);

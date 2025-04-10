@@ -53,18 +53,7 @@ const AddRecipes: React.FC<AddRecipesProps> = () => {
       ingredients: formData.ingredients.split(',').map((ingredient) => ingredient.trim()),
       instructions: formData.instructions.split(',').map((instruction) => instruction.trim())
     }));
-    // const newRecipe = {
-    //   id: Math.random().toString(36).substr(2, 9), 
-    //   image: preview || "",
-    //   recipeTitle: formData.recipeTitle,
-    //   cookingTime: formData.cookingTime,
-    //   ingredients: formData.ingredients
-    //     .split(",")
-    //     .map((item) => item.trim())
-    //     .filter(Boolean),
-    //   instructions: formData.instructions,
-    // };
-
+    
     setFormData({
       image: "",
       recipeTitle: "",
