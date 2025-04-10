@@ -54,7 +54,7 @@ const RecipesDisplay: React.FC = () => {
       ...selectedRecipe,
       ingredients: selectedRecipe.ingredients.map((i) => i.trim()),
       cookingTime: selectedRecipe.cookingTime.trim(),
-      instructions: selectedRecipe.instructions.trim(),
+      instructions: selectedRecipe.instructions.map((i) => i.trim()),
     };
 
     dispatch(updateRecipe(updatedRecipe));
@@ -332,7 +332,9 @@ const RecipesDisplay: React.FC = () => {
                 onChange={(e) =>
                   setSelectedRecipe({
                     ...selectedRecipe,
-                    instructions: e.target.value,
+                    instructions: e.target.value
+                      .split(",")
+                      .map((item) => item.trim()),
                   })
                 }
                 sx={{

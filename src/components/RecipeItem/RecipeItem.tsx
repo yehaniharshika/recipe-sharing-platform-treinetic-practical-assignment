@@ -17,7 +17,7 @@ interface RecipeItemProps {
   image: string;
   ingredients: string[];
   cookingTime: string;
-  instructions: string;
+  instructions: string[];
   isFavoritePage?: boolean;
   onRemoveFavorite?: () => void;
   onClick?: () => void; // Add this line to accept onClick
@@ -56,7 +56,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
   };
 
   const handleIconClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     if (isFavoritePage && onRemoveFavorite) {
       onRemoveFavorite();
     } else {
@@ -65,10 +65,17 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
   };
 
   const fetchRecipeDetails = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
     // Now you can add logic to fetch recipe details if needed
     console.log("Fetching details for the recipe...");
   };
+
+  const formattedInstructions = instructions.map((step, index) => (
+    <Typography key={index} sx={{ fontFamily: "Montserrat, sans-serif" }}>
+      ◼️ <span>{step}</span> {/* Use <span> instead of <p> */}
+    </Typography>
+  ));
+  
 
   return (
     <Card
@@ -125,7 +132,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
           className="product-item-desc"
           sx={{ fontFamily: "Montserrat, sans-serif" }}
         >
-          {instructions}
+          {formattedInstructions}
         </Typography>
 
         <Typography

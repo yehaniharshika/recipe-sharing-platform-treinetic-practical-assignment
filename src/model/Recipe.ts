@@ -4,7 +4,7 @@ export class Recipe {
   recipeTitle: string;
   cookingTime: string;
   ingredients: string[];
-  instructions: string
+  instructions: string[]
 
   constructor(
     id: string,
@@ -12,7 +12,7 @@ export class Recipe {
     recipeTitle: string,
     cookingTime: string,
     ingredients: string[],
-    instructions: string
+    instructions: string[]
   ) {
     this.id = id;
     this.image = image;

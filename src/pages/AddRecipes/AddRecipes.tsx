@@ -51,7 +51,7 @@ const AddRecipes: React.FC<AddRecipesProps> = () => {
       recipeTitle: formData.recipeTitle,
       cookingTime: formData.cookingTime,
       ingredients: formData.ingredients.split(',').map((ingredient) => ingredient.trim()),
-      instructions: formData.instructions,
+      instructions: formData.instructions.split(',').map((instruction) => instruction.trim())
     }));
     // const newRecipe = {
     //   id: Math.random().toString(36).substr(2, 9), 
