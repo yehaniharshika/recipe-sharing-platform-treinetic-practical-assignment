@@ -9,6 +9,7 @@ interface RecipeItemProps {
   recipeTitle: string;
   image: string;
   ingredients: string[];
+  cookingTime:string;
   instructions: string;
   isFavoritePage?: boolean;
   onRemoveFavorite?: () => void;
@@ -20,6 +21,7 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
   recipeTitle,
   image,
   ingredients,
+  cookingTime,
   instructions,
   isFavoritePage = false,
   onRemoveFavorite,
@@ -78,6 +80,13 @@ const RecipeItem: React.FC<RecipeItemProps> = ({
             {recipeTitle}
           </Typography>
           <img src={assets.rating_starts} alt="rating" />
+        </div>
+        <div className="product-item-name-rating">
+          <Typography
+            sx={{ fontFamily: "Montserrat, sans-serif", fontWeight: "bold" }}
+          >
+            Cooking Time: {cookingTime}
+          </Typography>
         </div>
 
         <Typography

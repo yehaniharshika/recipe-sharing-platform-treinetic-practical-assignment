@@ -9,6 +9,14 @@ FlavorNest is a recipe-sharing platform frontend that allows users to discover, 
 - **TypeScript**
 - **MaterialUI**
 
+## ✍🏻 Key Features
+
+- **Search Functionality** - Users can search for recipes by title or ingredients.
+- **Recipe Cards Display** - Each recipe is displayed in a visually appealing card layout.
+- **Responsive Design** - The platform layout adjusts for different screen sizes.
+- **Component-Based Architecture**
+- **Scalable UI with Material UI**
+
 ## Setup & Installation⚙️ 
 
 ### 1️⃣ Clone the Repository

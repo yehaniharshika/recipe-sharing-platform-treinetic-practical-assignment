@@ -53,6 +53,7 @@ const RecipesDisplay: React.FC = () => {
     const updatedRecipe: Recipe = {
       ...selectedRecipe,
       ingredients: selectedRecipe.ingredients.map((i) => i.trim()),
+      cookingTime: selectedRecipe.cookingTime.trim(),
       instructions: selectedRecipe.instructions.trim(),
     };
 
@@ -74,7 +75,7 @@ const RecipesDisplay: React.FC = () => {
     });
     handleCloseModal();
   };
-  
+
   const handleDelete = () => {
     if (!selectedRecipe) return;
 
@@ -132,7 +133,6 @@ const RecipesDisplay: React.FC = () => {
     );
     return titleMatch || ingredientsMatch;
   });
-  
 
   return (
     <Box
@@ -169,11 +169,12 @@ const RecipesDisplay: React.FC = () => {
         alignItems="stretch"
         sx={{ marginTop: "50px", cursor: "pointer" }}
       >
-         {filteredRecipes.map((recipe) => (
+        {filteredRecipes.map((recipe) => (
           <RecipeItem
             key={recipe.id}
             id={recipe.id}
             recipeTitle={recipe.recipeTitle}
+            cookingTime={recipe.cookingTime}
             image={recipe.image}
             ingredients={recipe.ingredients}
             instructions={recipe.instructions}
@@ -222,6 +223,40 @@ const RecipesDisplay: React.FC = () => {
                   setSelectedRecipe({
                     ...selectedRecipe,
                     recipeTitle: e.target.value,
+                  })
+                }
+                sx={{
+                  marginBottom: 2,
+                  fontSize: "13px",
+                  fontFamily: "Montserrat, sans-serif",
+                  "& .MuiOutlinedInput-root": {
+                    fontFamily: "Montserrat, sans-serif",
+                    "& fieldset": {
+                      borderColor: "#ccc",
+                    },
+                    "&:hover fieldset": {
+                      borderColor: "#FF5722",
+                    },
+                    "&.Mui-focused fieldset": {
+                      borderColor: "#FF5722",
+                      borderWidth: "3px",
+                    },
+                  },
+                  "& .MuiInputBase-input::placeholder": {
+                    fontFamily: "Montserrat, sans-serif",
+                  },
+                }}
+              />
+
+              <TextField
+                name="cookingTime"
+                placeholder="Cooking Time"
+                fullWidth
+                value={selectedRecipe.cookingTime}
+                onChange={(e) =>
+                  setSelectedRecipe({
+                    ...selectedRecipe,
+                    cookingTime: e.target.value,
                   })
                 }
                 sx={{
